@@ -20,3 +20,9 @@ def plot_x_by_class_y(*, table, x_column, y_column):
 def mcc(*, tp, fp, tn, fn):
   mcc_score = ((tp*tn)-(fp*fn))/((tp+fp)*(tp+fn)*(tn+fp)*(tn+fn))**.5
   return mcc_score
+
+def wrangle_text(*, essay):
+  doc = nlp(essay)
+  doc_filter = [token for token in doc if token.is_alpha==True and token.is_stop==False and token.is_oov==False]
+  doc_str = [token.text.lower() for token in doc_filter]
+  return doc_str
